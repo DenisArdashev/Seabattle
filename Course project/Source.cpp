@@ -1,4 +1,4 @@
-#include<iostream>;
+п»ї#include<iostream>;
 #include<Windows.h>;
 #include<conio.h>;
 #include<time.h>;
@@ -12,7 +12,7 @@ enum Color {
 	LightRed, LightMagenta, Yellow, White
 };
 enum Direction { Up = 72, Left = 75, Right = 77, Down = 80, Enter = 13, esc = 27, Space = 32, Num1 = 49, Num2 = 50, Num3 = 51, Num4 = 52 };
-HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);//получаем дискриптор активного окна
+HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);//РїРѕР»СѓС‡Р°РµРј РґРёСЃРєСЂРёРїС‚РѕСЂ Р°РєС‚РёРІРЅРѕРіРѕ РѕРєРЅР°
 void SetCursor(int x, int y)
 {
 	COORD myCoords = { x,y };
@@ -22,22 +22,22 @@ void SetColor(Color text, Color background)
 {
 	SetConsoleTextAttribute(hStdOut, (WORD)((background << 4) | text));
 }
-//------------------координаты сообщений в консоли-------------------
+//------------------РєРѕРѕСЂРґРёРЅР°С‚С‹ СЃРѕРѕР±С‰РµРЅРёР№ РІ РєРѕРЅСЃРѕР»Рё-------------------
 int PlayerCountMessageX = 17, PlayerCountMessageY = 3, EnemyCountMessageX = 73, EnemyCountMessageY = 3;
 int PlayerShotX = 45, PlayerShotY = 6, EnemyShotX = 45, EnemyShotY = 5;
 int ConsolMessageX = 25, ConsolMessageY = 5;
 int menuX = 30, menuY = 7;
 //-------------------------------------------------------------------
 const int AllCount = 10;
-const int fieldH = 12, fieldW = 24; // размеры поля
+const int fieldH = 12, fieldW = 24; // СЂР°Р·РјРµСЂС‹ РїРѕР»СЏ
 const int strLength = 20, countPunctsMenu = 3, strPass = 15; //
-int fieldX = 20, fieldY = 10, startX = 22, startY = 11, fieldEnemyX = 76, startEnemyX = 78; // координаты начала отрисовки полей и начала курсора
-int size = 1, sizeCol = 2; // размер корабля
-int copyX, copyY, firstHitX, firstHitY; // переменные для сохранения координат при сложном режиме игры.
-char** ship = nullptr; // массив для отрисовки корабля при ручной расстановке
-char field[fieldH][fieldW]; // массив поля игрока
-char fieldEnemy[fieldH][fieldW]; // массив поля противника
-char direction;//направление выстрела
+int fieldX = 20, fieldY = 10, startX = 22, startY = 11, fieldEnemyX = 76, startEnemyX = 78; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РЅР°С‡Р°Р»Р° РѕС‚СЂРёСЃРѕРІРєРё РїРѕР»РµР№ Рё РЅР°С‡Р°Р»Р° РєСѓСЂСЃРѕСЂР°
+int size = 1, sizeCol = 2; // СЂР°Р·РјРµСЂ РєРѕСЂР°Р±Р»СЏ
+int copyX, copyY, firstHitX, firstHitY; // РїРµСЂРµРјРµРЅРЅС‹Рµ РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ РєРѕРѕСЂРґРёРЅР°С‚ РїСЂРё СЃР»РѕР¶РЅРѕРј СЂРµР¶РёРјРµ РёРіСЂС‹.
+char** ship = nullptr; // РјР°СЃСЃРёРІ РґР»СЏ РѕС‚СЂРёСЃРѕРІРєРё РєРѕСЂР°Р±Р»СЏ РїСЂРё СЂСѓС‡РЅРѕР№ СЂР°СЃСЃС‚Р°РЅРѕРІРєРµ
+char field[fieldH][fieldW]; // РјР°СЃСЃРёРІ РїРѕР»СЏ РёРіСЂРѕРєР°
+char fieldEnemy[fieldH][fieldW]; // РјР°СЃСЃРёРІ РїРѕР»СЏ РїСЂРѕС‚РёРІРЅРёРєР°
+char direction;//РЅР°РїСЂР°РІР»РµРЅРёРµ РІС‹СЃС‚СЂРµР»Р°
 struct User
 {
 	char login[strLength];
@@ -51,7 +51,7 @@ struct Ship
 	int xCoord, yCoord, size, health;
 	bool gorizontal;
 };
-void showMenu(char mas[][20], int row, int punct) // функция отрисовки активного пункта
+void showMenu(char mas[][20], int row, int punct) // С„СѓРЅРєС†РёСЏ РѕС‚СЂРёСЃРѕРІРєРё Р°РєС‚РёРІРЅРѕРіРѕ РїСѓРЅРєС‚Р°
 {
 	for (size_t i = 0; i < row; i++)
 	{
@@ -65,7 +65,7 @@ void showMenu(char mas[][20], int row, int punct) // функция отрисовки активного
 	}
 	SetColor(Black, White);
 }
-int Menu(char mas[][20], int row) // функция меню
+int Menu(char mas[][20], int row) // С„СѓРЅРєС†РёСЏ РјРµРЅСЋ
 {
 	int key, number = 0;
 	do
@@ -119,7 +119,7 @@ bool Registration(User userName, User temp, FILE*& f)
 				system("cls");
 				key = true;
 				SetCursor(ConsolMessageX, ConsolMessageY);
-				cout << "Такой пользователь уже существует, введите другое имя.";
+				cout << "РўР°РєРѕР№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚, РІРІРµРґРёС‚Рµ РґСЂСѓРіРѕРµ РёРјСЏ.";
 				Sleep(1000);
 				fclose(f);
 				return false;
@@ -132,11 +132,11 @@ bool Registration(User userName, User temp, FILE*& f)
 			if (f != nullptr)
 			{
 				SetCursor(menuX, menuY + 1);
-				cout << "Пароль: ";
+				cout << "РџР°СЂРѕР»СЊ: ";
 				gets_s(userName.pass, strPass);
 				fwrite(&userName, sizeof(User), 1, f);
 				SetCursor(ConsolMessageX, ConsolMessageY);
-				cout << "Вы успешно зарегистрированы";
+				cout << "Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅС‹";
 				Sleep(1000);
 				system("cls");
 				fclose(f);
@@ -150,11 +150,11 @@ bool Registration(User userName, User temp, FILE*& f)
 		if (f != nullptr)
 		{
 			SetCursor(menuX, menuY + 1);
-			cout << "Пароль: ";
+			cout << "РџР°СЂРѕР»СЊ: ";
 			gets_s(userName.pass, strPass);
 			fwrite(&userName, sizeof(User), 1, f);
 			SetCursor(ConsolMessageX, ConsolMessageY);
-			cout << "Вы успешно зарегистрировны";
+			cout << "Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІРЅС‹";
 			Sleep(1000);
 			system("cls");
 			fclose(f);
@@ -185,7 +185,7 @@ int AutorizationLogin(User userName, User temp, FILE*& f)
 	else
 	{
 		SetCursor(ConsolMessageX, ConsolMessageY);
-		cout << "Зарегистрированных пользователей не найдено. Зарегистрируйтесь!";
+		cout << "Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РЅРµ РЅР°Р№РґРµРЅРѕ. Р—Р°СЂРµРіРёСЃС‚СЂРёСЂСѓР№С‚РµСЃСЊ!";
 		Sleep(1000);
 		return -1;
 	}
@@ -196,7 +196,7 @@ int memory(FILE* f, User*& mas)
 	errno_t err = fopen_s(&f, "users.txt", "r");
 	if (f != nullptr)
 	{
-		//чтобы работала эти функции файл должен быть открыт на чтение
+		//С‡С‚РѕР±С‹ СЂР°Р±РѕС‚Р°Р»Р° СЌС‚Рё С„СѓРЅРєС†РёРё С„Р°Р№Р» РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РѕС‚РєСЂС‹С‚ РЅР° С‡С‚РµРЅРёРµ
 		length = _filelength(_fileno(f)) / sizeof(User);
 		if (length > 0)
 		{
@@ -236,7 +236,7 @@ void reMemory(Type**& mas, int row, int col)
 	}
 }
 template<typename myType>
-void SetShip(myType** ship, int sizeRow, int sizeCol) // заполнение динамического массива корабля
+void SetShip(myType** ship, int sizeRow, int sizeCol) // Р·Р°РїРѕР»РЅРµРЅРёРµ РґРёРЅР°РјРёС‡РµСЃРєРѕРіРѕ РјР°СЃСЃРёРІР° РєРѕСЂР°Р±Р»СЏ
 {
 	for (size_t i = 0; i < sizeRow; i++)
 	{
@@ -246,7 +246,7 @@ void SetShip(myType** ship, int sizeRow, int sizeCol) // заполнение динамическог
 		}
 	}
 }
-void SetShip(bool gorizontal, int size, int x, int y, char field[][fieldW], int fieldX) // установка корабля на поле и отрисовка зоны вокруг корабля
+void SetShip(bool gorizontal, int size, int x, int y, char field[][fieldW], int fieldX) // СѓСЃС‚Р°РЅРѕРІРєР° РєРѕСЂР°Р±Р»СЏ РЅР° РїРѕР»Рµ Рё РѕС‚СЂРёСЃРѕРІРєР° Р·РѕРЅС‹ РІРѕРєСЂСѓРі РєРѕСЂР°Р±Р»СЏ
 {
 	if (gorizontal)
 	{
@@ -286,7 +286,7 @@ void SetShip(bool gorizontal, int size, int x, int y, char field[][fieldW], int 
 		}
 	}
 }
-void SetShip(Ship mas[AllCount], bool gorizontal, int size, int x, int y, int index) //заполнение структуры корабля
+void SetShip(Ship mas[AllCount], bool gorizontal, int size, int x, int y, int index) //Р·Р°РїРѕР»РЅРµРЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ РєРѕСЂР°Р±Р»СЏ
 {
 	mas[index].gorizontal = gorizontal;
 	mas[index].size = size;
@@ -295,7 +295,7 @@ void SetShip(Ship mas[AllCount], bool gorizontal, int size, int x, int y, int in
 	mas[index].yCoord = y;
 }
 template<typename Type>
-void ShowBattleShips(int x, int y, Type** ship, int size, int sizeCol, bool gorizontal, Color color1) // отрисовка корабля
+void ShowBattleShips(int x, int y, Type** ship, int size, int sizeCol, bool gorizontal, Color color1) // РѕС‚СЂРёСЃРѕРІРєР° РєРѕСЂР°Р±Р»СЏ
 {
 	SetCursor(x, y);
 	SetColor(color1, color1);
@@ -335,7 +335,7 @@ void ShowBattleShips(int x, int y, Type** ship, int size, int sizeCol, bool gori
 	SetColor(Black, White);
 }
 template<typename Type>
-void ShowBattleShips(int x, int y, Type** ship, int size, int sizeCol, bool gorizontal, Color color1, Color color2, char field[][fieldW]) // функция закрашивания
+void ShowBattleShips(int x, int y, Type** ship, int size, int sizeCol, bool gorizontal, Color color1, Color color2, char field[][fieldW]) // С„СѓРЅРєС†РёСЏ Р·Р°РєСЂР°С€РёРІР°РЅРёСЏ
 {
 	SetCursor(x, y);
 	SetColor(color1, color1);
@@ -390,7 +390,7 @@ void ShowBattleShips(int x, int y, Type** ship, int size, int sizeCol, bool gori
 		}
 	SetColor(Black, White);
 }
-void ShiftShip(bool gorizontal, int& x, int& y, int size) //сдвиг корабля если пытаемся развернуть рядом с краем
+void ShiftShip(bool gorizontal, int& x, int& y, int size) //СЃРґРІРёРі РєРѕСЂР°Р±Р»СЏ РµСЃР»Рё РїС‹С‚Р°РµРјСЃСЏ СЂР°Р·РІРµСЂРЅСѓС‚СЊ СЂСЏРґРѕРј СЃ РєСЂР°РµРј
 {
 	if (gorizontal)
 	{
@@ -429,7 +429,7 @@ void SetBattleField(char field[][fieldW])
 		}
 	}
 }
-void ShowBattleField(char field[][fieldW], Color colorShip, Color colorArea, int x, int y) // отрисовка поля
+void ShowBattleField(char field[][fieldW], Color colorShip, Color colorArea, int x, int y) // РѕС‚СЂРёСЃРѕРІРєР° РїРѕР»СЏ
 {
 	for (size_t i = 0; i < fieldH; i++)
 	{
@@ -446,22 +446,22 @@ void ShowBattleField(char field[][fieldW], Color colorShip, Color colorArea, int
 				SetColor(Black, Black);
 				cout << field[i][j];
 			}
-			else if (field[i][j] == 'x') // зона вокруг корабля при ручной установке
+			else if (field[i][j] == 'x') // Р·РѕРЅР° РІРѕРєСЂСѓРі РєРѕСЂР°Р±Р»СЏ РїСЂРё СЂСѓС‡РЅРѕР№ СѓСЃС‚Р°РЅРѕРІРєРµ
 			{
 				SetColor(colorArea, Blue);
 				cout << field[i][j];
 			}
-			else if (field[i][j] == 'o') // промах
+			else if (field[i][j] == 'o') // РїСЂРѕРјР°С…
 			{
 				SetColor(Red, Blue);
 				cout << field[i][j];
 			}
-			else if (field[i][j] == '#') // ранение
+			else if (field[i][j] == '#') // СЂР°РЅРµРЅРёРµ
 			{
 				SetColor(Red, Red);
 				cout << field[i][j];
 			}
-			else if (field[i][j] == '*') // живой корабль
+			else if (field[i][j] == '*') // Р¶РёРІРѕР№ РєРѕСЂР°Р±Р»СЊ
 			{
 				SetColor(colorShip, colorShip);
 				cout << field[i][j];
@@ -475,7 +475,7 @@ void ShowBattleField(char field[][fieldW], Color colorShip, Color colorArea, int
 	}
 	SetColor(Black, White);
 }
-void clearStr(int x, int y) // стирание строки
+void clearStr(int x, int y) // СЃС‚РёСЂР°РЅРёРµ СЃС‚СЂРѕРєРё
 {
 	const int length = 200;
 	int mas[length];
@@ -492,7 +492,7 @@ void clearStr(int x, int y) // стирание строки
 	}
 	SetColor(Black, White);
 }
-bool chekCrossing(char field[][fieldW], bool gorizontal, int x, int y, int size, int fieldX) // проверка на пересечение с другими кораблями
+bool chekCrossing(char field[][fieldW], bool gorizontal, int x, int y, int size, int fieldX) // РїСЂРѕРІРµСЂРєР° РЅР° РїРµСЂРµСЃРµС‡РµРЅРёРµ СЃ РґСЂСѓРіРёРјРё РєРѕСЂР°Р±Р»СЏРјРё
 {
 	if (gorizontal)
 	{
@@ -516,19 +516,19 @@ bool chekCrossing(char field[][fieldW], bool gorizontal, int x, int y, int size,
 	}
 	return false;
 }
-void ChekPlacement(char field[][fieldW], int x, int y, int size, bool gorizontal, int& count, int& AllCount, int fieldX) // установка корабля и проверка
+void ChekPlacement(char field[][fieldW], int x, int y, int size, bool gorizontal, int& count, int& AllCount, int fieldX) // СѓСЃС‚Р°РЅРѕРІРєР° РєРѕСЂР°Р±Р»СЏ Рё РїСЂРѕРІРµСЂРєР°
 {
 	if (count == 0)
 	{
 		SetCursor(0, 6);
-		cout << "Все корабли этого типа расставлены, выберите другой.";
+		cout << "Р’СЃРµ РєРѕСЂР°Р±Р»Рё СЌС‚РѕРіРѕ С‚РёРїР° СЂР°СЃСЃС‚Р°РІР»РµРЅС‹, РІС‹Р±РµСЂРёС‚Рµ РґСЂСѓРіРѕР№.";
 	}
 	else
 	{
 		if (chekCrossing(field, gorizontal, x, y, size, fieldX) == true)
 		{
 			SetCursor(0, 6);
-			cout << "Здесь нельзя разместить корабль.";
+			cout << "Р—РґРµСЃСЊ РЅРµР»СЊР·СЏ СЂР°Р·РјРµСЃС‚РёС‚СЊ РєРѕСЂР°Р±Р»СЊ.";
 		}
 		else
 		{
@@ -538,7 +538,7 @@ void ChekPlacement(char field[][fieldW], int x, int y, int size, bool gorizontal
 		}
 	}
 }
-void SettingsBattleShips(Ship ShipPlayer[AllCount]) // ручная расстановка корабля
+void SettingsBattleShips(Ship ShipPlayer[AllCount]) // СЂСѓС‡РЅР°СЏ СЂР°СЃСЃС‚Р°РЅРѕРІРєР° РєРѕСЂР°Р±Р»СЏ
 {
 	int key, x = startX, y = startY;
 	int AllCount = 10, countFlagman = 1, count3 = 2, count2 = 3, count1 = 4;
@@ -549,12 +549,12 @@ void SettingsBattleShips(Ship ShipPlayer[AllCount]) // ручная расстановка корабл
 	do
 	{	
 		SetCursor(0, 0);
-		cout << "Нажмите цифру, чтобы выбрать корабль: \n";
+		cout << "РќР°Р¶РјРёС‚Рµ С†РёС„СЂСѓ, С‡С‚РѕР±С‹ РІС‹Р±СЂР°С‚СЊ РєРѕСЂР°Р±Р»СЊ: \n";
 		cout << "1 - *\t\t x "<< count1<<"\n";
 		cout << "2 - **\t\t x "<< count2<<"\n";
 		cout << "3 - ***\t\t x "<<count3<<"\n";
 		cout << "4 - ****\t x "<<countFlagman<<"\n";
-		cout << "Клавиша 'Пробел', чтобы повернуть корабль\n";		
+		cout << "РљР»Р°РІРёС€Р° 'РџСЂРѕР±РµР»', С‡С‚РѕР±С‹ РїРѕРІРµСЂРЅСѓС‚СЊ РєРѕСЂР°Р±Р»СЊ\n";		
 		ShowBattleField(field, Green, Red, fieldX, fieldY);
 		ShowBattleShips(x, y, ship, size, sizeCol, gorizontal, Green);
 		key = _getch();
@@ -678,7 +678,7 @@ void SettingsBattleShips(Ship ShipPlayer[AllCount]) // ручная расстановка корабл
 		ShowBattleField(field, Green, Blue, fieldX, fieldY);
 	} while (AllCount != 0);
 }
-void RandomCoord(int& x, int& y, int size, bool gorizontal, int StartCoordX) // рандомные координаты для авто установки кораблей
+void RandomCoord(int& x, int& y, int size, bool gorizontal, int StartCoordX) // СЂР°РЅРґРѕРјРЅС‹Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РґР»СЏ Р°РІС‚Рѕ СѓСЃС‚Р°РЅРѕРІРєРё РєРѕСЂР°Р±Р»РµР№
 {
 	if (gorizontal)
 	{
@@ -703,7 +703,7 @@ void RandomCoord(int& x, int& y, int size, bool gorizontal, int StartCoordX) // 
 			y = startY + rand() % (10 - size);
 	}
 }
-void AutoPlacement(char field[][fieldW], int fieldX, int fieldY, int StartCoordX, Color colorShips, Color Area, Ship Ship[AllCount]) // автоматическая расстановка кораблей
+void AutoPlacement(char field[][fieldW], int fieldX, int fieldY, int StartCoordX, Color colorShips, Color Area, Ship Ship[AllCount]) // Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєР°СЏ СЂР°СЃСЃС‚Р°РЅРѕРІРєР° РєРѕСЂР°Р±Р»РµР№
 {
 	int AllCount = 10, countFlagman = 1, count3 = 2, count2 = 3, count1 = 4;
 	int x = 0, y = 0, size = 4;
@@ -717,10 +717,10 @@ void AutoPlacement(char field[][fieldW], int fieldX, int fieldY, int StartCoordX
 		{
 			if (!chekCrossing(field, gorizontal, x, y, size, fieldX))
 			{
-				SetShip(gorizontal, size, x, y, field, fieldX); // установка кораблся
+				SetShip(gorizontal, size, x, y, field, fieldX); // СѓСЃС‚Р°РЅРѕРІРєР° РєРѕСЂР°Р±Р»СЃСЏ
 				countFlagman--;
 				AllCount--;
-				SetShip(Ship, gorizontal, size, x, y, ShipNumber);	// заполнение структуры	 		
+				SetShip(Ship, gorizontal, size, x, y, ShipNumber);	// Р·Р°РїРѕР»РЅРµРЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹	 		
 				ShipNumber++;
 				if (countFlagman == 0)
 				{
@@ -903,7 +903,7 @@ void AimingShotEnemy(int copyX, int copyY, int& x, int& y, int hit, Ship ShipsPl
 		}
 	}
 }
-void ShotEnemy(Ship ShipsPlayer[AllCount], bool hardMode, int& hit, bool& miss, int& count) // выстрел противника
+void ShotEnemy(Ship ShipsPlayer[AllCount], bool hardMode, int& hit, bool& miss, int& count) // РІС‹СЃС‚СЂРµР» РїСЂРѕС‚РёРІРЅРёРєР°
 {
 	int ShipNumber = 0;
 	int y, x;
@@ -946,7 +946,7 @@ void ShotEnemy(Ship ShipsPlayer[AllCount], bool hardMode, int& hit, bool& miss, 
 				{
 					SetCursor(EnemyShotX, EnemyShotY);
 					SetColor(Red, White);
-					cout << "Ваш корабль подбит.";
+					cout << "Р’Р°С€ РєРѕСЂР°Р±Р»СЊ РїРѕРґР±РёС‚.";
 					miss = false;
 					copyX = x;
 					copyY = y;
@@ -961,7 +961,7 @@ void ShotEnemy(Ship ShipsPlayer[AllCount], bool hardMode, int& hit, bool& miss, 
 				{
 					SetCursor(EnemyShotX, EnemyShotY);
 					SetColor(Red, White);
-					cout << "Ваш корабль уничтожен.";
+					cout << "Р’Р°С€ РєРѕСЂР°Р±Р»СЊ СѓРЅРёС‡С‚РѕР¶РµРЅ.";
 					ShowArea(x, y, field, ShipsPlayer, fieldX);
 					firstHitX = 0;
 					firstHitY = 0;
@@ -992,7 +992,7 @@ void ShotEnemy(Ship ShipsPlayer[AllCount], bool hardMode, int& hit, bool& miss, 
 	} while (key == false);
 }
 
-int Battle(int startX, Ship ShipsPlayer[AllCount], Ship ShipsEnemy[AllCount], bool hardMode, int& PlayerCount, int& EnemyCount) // выстрел игрока
+int Battle(int startX, Ship ShipsPlayer[AllCount], Ship ShipsEnemy[AllCount], bool hardMode, int& PlayerCount, int& EnemyCount) // РІС‹СЃС‚СЂРµР» РёРіСЂРѕРєР°
 {
 	int x = startX, y = startY, key, hit = 0;
 	int points = 0;
@@ -1030,7 +1030,7 @@ int Battle(int startX, Ship ShipsPlayer[AllCount], Ship ShipsEnemy[AllCount], bo
 			{
 				SetCursor(PlayerShotX, PlayerShotY);
 				SetColor(Black, White);
-				cout << "Вы уже стреляли по этим координатам.";
+				cout << "Р’С‹ СѓР¶Рµ СЃС‚СЂРµР»СЏР»Рё РїРѕ СЌС‚РёРј РєРѕРѕСЂРґРёРЅР°С‚Р°Рј.";
 			}
 			else
 			{
@@ -1050,13 +1050,13 @@ int Battle(int startX, Ship ShipsPlayer[AllCount], Ship ShipsEnemy[AllCount], bo
 					{
 						SetCursor(45, 6);
 						SetColor(Green, White);
-						cout << "Есть попадание.";
+						cout << "Р•СЃС‚СЊ РїРѕРїР°РґР°РЅРёРµ.";
 					}
 					else
 					{
 						SetCursor(45, 6);
 						SetColor(Green, White);
-						cout << "Корабль противника уничтожен.";
+						cout << "РљРѕСЂР°Р±Р»СЊ РїСЂРѕС‚РёРІРЅРёРєР° СѓРЅРёС‡С‚РѕР¶РµРЅ.";
 						ShowArea(x, y, fieldEnemy, ShipsEnemy, fieldEnemyX);
 						EnemyCount--;
 						points += 100;
@@ -1070,9 +1070,9 @@ int Battle(int startX, Ship ShipsPlayer[AllCount], Ship ShipsEnemy[AllCount], bo
 		ShowBattleField(field, Green, Blue, fieldX, fieldY);
 		ShowBattleField(fieldEnemy, Blue, Blue, fieldEnemyX, fieldY);
 		SetCursor(PlayerCountMessageX, PlayerCountMessageY);
-		cout << "Осталось ваших кораблей: " << PlayerCount;
+		cout << "РћСЃС‚Р°Р»РѕСЃСЊ РІР°С€РёС… РєРѕСЂР°Р±Р»РµР№: " << PlayerCount;
 		SetCursor(EnemyCountMessageX, EnemyCountMessageY);
-		cout << "Осталось кораблей противника: " << EnemyCount;
+		cout << "РћСЃС‚Р°Р»РѕСЃСЊ РєРѕСЂР°Р±Р»РµР№ РїСЂРѕС‚РёРІРЅРёРєР°: " << EnemyCount;
 	} while (EnemyCount > 0 && PlayerCount > 0);
 	return points;
 }
@@ -1121,36 +1121,36 @@ void PlayerLose(User &Player)
 	clearStr(PlayerShotX, PlayerShotY);
 	clearStr(EnemyShotX, EnemyShotY);
 	SetCursor(ConsolMessageX, ConsolMessageY);
-	cout << "К сожалению вы проиграли, повезёт в другой раз!";
+	cout << "Рљ СЃРѕР¶Р°Р»РµРЅРёСЋ РІС‹ РїСЂРѕРёРіСЂР°Р»Рё, РїРѕРІРµР·С‘С‚ РІ РґСЂСѓРіРѕР№ СЂР°Р·!";
 	Player.countGames++;
 	SetCursor(ConsolMessageX, ConsolMessageY + 1);
-	cout << "Вы заработали: " << Player.points << " очков.";
-	cout << "Нажмите Enter, чтобы продолжить.";	
+	cout << "Р’С‹ Р·Р°СЂР°Р±РѕС‚Р°Р»Рё: " << Player.points << " РѕС‡РєРѕРІ.";
+	cout << "РќР°Р¶РјРёС‚Рµ Enter, С‡С‚РѕР±С‹ РїСЂРѕРґРѕР»Р¶РёС‚СЊ.";	
 }
 void PlayerWin(User &Player)
 {
 	clearStr(PlayerShotX, PlayerShotY);
 	clearStr(EnemyShotX, EnemyShotY);
 	SetCursor(ConsolMessageX, ConsolMessageY);
-	cout << "Поздравляем вас с победой!\n";
+	cout << "РџРѕР·РґСЂР°РІР»СЏРµРј РІР°СЃ СЃ РїРѕР±РµРґРѕР№!\n";
 	Player.points += 1000;
 	Player.countGames++;
 	Player.countVictory++;
 	SetCursor(ConsolMessageX, ConsolMessageY + 1);
-	cout << "Вам получаете 2000 очков.";
-	cout << "Нажмите Enter, чтобы продолжить.";	
+	cout << "Р’Р°Рј РїРѕР»СѓС‡Р°РµС‚Рµ 2000 РѕС‡РєРѕРІ.";
+	cout << "РќР°Р¶РјРёС‚Рµ Enter, С‡С‚РѕР±С‹ РїСЂРѕРґРѕР»Р¶РёС‚СЊ.";	
 }
 int main()
 {
-	SetConsoleCP(1251);//ввод кириллицы
-	SetConsoleOutputCP(1251);//вывод кириллицы
+	SetConsoleCP(1251);//РІРІРѕРґ РєРёСЂРёР»Р»РёС†С‹
+	SetConsoleOutputCP(1251);//РІС‹РІРѕРґ РєРёСЂРёР»Р»РёС†С‹
 	srand(time(NULL));
 	system("cls");
-	char RegistrationMenu[countPunctsMenu][strLength] = { "Регистрация", "Авторизация", "Выход" };
-	char MainMenu[countPunctsMenu][strLength] = { "Начать игру", "Статистика", "Назад" };
-	char DifficultLevel_Menu[countPunctsMenu][strLength] = { "Лёгкий", "Сложный", "Назад" };
-	char PlacementShips[countPunctsMenu][strLength] = { "Автоматически", "Вручную", "Назад" };
-	char EndMenu[countPunctsMenu][strLength] = { "Да", "Нет" };
+	char RegistrationMenu[countPunctsMenu][strLength] = { "Р РµРіРёСЃС‚СЂР°С†РёСЏ", "РђРІС‚РѕСЂРёР·Р°С†РёСЏ", "Р’С‹С…РѕРґ" };
+	char MainMenu[countPunctsMenu][strLength] = { "РќР°С‡Р°С‚СЊ РёРіСЂСѓ", "РЎС‚Р°С‚РёСЃС‚РёРєР°", "РќР°Р·Р°Рґ" };
+	char DifficultLevel_Menu[countPunctsMenu][strLength] = { "Р›С‘РіРєРёР№", "РЎР»РѕР¶РЅС‹Р№", "РќР°Р·Р°Рґ" };
+	char PlacementShips[countPunctsMenu][strLength] = { "РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё", "Р’СЂСѓС‡РЅСѓСЋ", "РќР°Р·Р°Рґ" };
+	char EndMenu[countPunctsMenu][strLength] = { "Р”Р°", "РќРµС‚" };
 	Ship ShipsPlayer[AllCount];
 	Ship ShipsEnemy[AllCount];
 	User Player;
@@ -1179,12 +1179,12 @@ int main()
 							chek = false;
 							system("cls");
 							SetCursor(menuX, menuY);
-							cout << "Логин: ";
+							cout << "Р›РѕРіРёРЅ: ";
 							gets_s(Player.login, strLength);
 							if (strlen(Player.login) < 1)
 							{
 								SetCursor(ConsolMessageX, ConsolMessageY);
-								cout << "Нельзя ввести меньше одного символа";
+								cout << "РќРµР»СЊР·СЏ РІРІРµСЃС‚Рё РјРµРЅСЊС€Рµ РѕРґРЅРѕРіРѕ СЃРёРјРІРѕР»Р°";
 								Sleep(1000);
 								clearStr(ConsolMessageX, ConsolMessageY);
 								chek = true;
@@ -1205,20 +1205,20 @@ int main()
 						clearStr(ConsolMessageX, ConsolMessageY);
 						system("cls");
 						SetCursor(menuX, menuY);
-						cout << "Логин: ";
+						cout << "Р›РѕРіРёРЅ: ";
 						gets_s(Player.login, strLength);
 						SetCursor(10, 6);
 						if (AutorizationLogin(Player, temp, f))
 						{
 							fclose(f);
 							SetCursor(menuX, menuY + 1);
-							cout << "Пароль: ";
+							cout << "РџР°СЂРѕР»СЊ: ";
 							gets_s(Player.pass, strPass);
 							if (ChekPasword(Player, temp, f))
 							{
 								fclose(f);
 								SetCursor(ConsolMessageX, ConsolMessageY);
-								cout << "Вы успешно авторизовались.";
+								cout << "Р’С‹ СѓСЃРїРµС€РЅРѕ Р°РІС‚РѕСЂРёР·РѕРІР°Р»РёСЃСЊ.";
 								Sleep(1000);
 								key = true;
 							}
@@ -1226,7 +1226,7 @@ int main()
 							{
 								fclose(f);
 								SetCursor(ConsolMessageX, ConsolMessageY);
-								cout << "Неверный пароль.";
+								cout << "РќРµРІРµСЂРЅС‹Р№ РїР°СЂРѕР»СЊ.";
 								Sleep(1000);
 							}
 						}
@@ -1234,7 +1234,7 @@ int main()
 						{
 							fclose(f);
 							SetCursor(ConsolMessageX, ConsolMessageY);
-							cout << "Не верный логин, или такого пользователя не существует, зарегистрируйтесь";
+							cout << "РќРµ РІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ, РёР»Рё С‚Р°РєРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚, Р·Р°СЂРµРіРёСЃС‚СЂРёСЂСѓР№С‚РµСЃСЊ";
 							Sleep(1000);
 							break;
 						}
@@ -1262,7 +1262,7 @@ int main()
 						battle = false;
 						prev = false;
 						punct = Menu(MainMenu, countPunctsMenu);
-						if (punct == 0) // Начать игру
+						if (punct == 0) // РќР°С‡Р°С‚СЊ РёРіСЂСѓ
 						{
 							do
 							{
@@ -1270,13 +1270,13 @@ int main()
 								prev = false;
 								system("cls");
 								SetCursor(ConsolMessageX, ConsolMessageY);
-								cout << "Выберите уровень сложности.";
+								cout << "Р’С‹Р±РµСЂРёС‚Рµ СѓСЂРѕРІРµРЅСЊ СЃР»РѕР¶РЅРѕСЃС‚Рё.";
 								punct = Menu(DifficultLevel_Menu, 3);
-								if (punct == 0) // Лёгкий
+								if (punct == 0) // Р›С‘РіРєРёР№
 								{
 									system("cls");
 									SetCursor(ConsolMessageX, ConsolMessageY);
-									cout << "Расставить корабли: \n";
+									cout << "Р Р°СЃСЃС‚Р°РІРёС‚СЊ РєРѕСЂР°Р±Р»Рё: \n";
 									punct = Menu(PlacementShips, 3);
 									if (punct == 0 || punct == 1)
 									{
@@ -1290,11 +1290,11 @@ int main()
 										system("cls");
 									}
 								}
-								else if (punct == 1) // сложный
+								else if (punct == 1) // СЃР»РѕР¶РЅС‹Р№
 								{
 									system("cls");
 									SetCursor(ConsolMessageX, ConsolMessageY);
-									cout << "Расставить корабли: \n";
+									cout << "Р Р°СЃСЃС‚Р°РІРёС‚СЊ РєРѕСЂР°Р±Р»Рё: \n";
 									hardMode = true;
 									punct = Menu(PlacementShips, 3);
 									if (punct == 0 || punct == 1)
@@ -1309,7 +1309,7 @@ int main()
 										system("cls");
 									}
 								}
-								else if (punct == 2) // назад
+								else if (punct == 2) // РЅР°Р·Р°Рґ
 								{
 									prev = true;
 									system("cls");
@@ -1317,21 +1317,21 @@ int main()
 							} while (!prev);
 							prev = false;
 						}
-						else if (punct == 1) // статистика
+						else if (punct == 1) // СЃС‚Р°С‚РёСЃС‚РёРєР°
 						{
 							sorting(listUsers, list);
 							system("cls");
 							SetCursor(ConsolMessageX, ConsolMessageY);
-							cout << "Статистика:\n";
+							cout << "РЎС‚Р°С‚РёСЃС‚РёРєР°:\n";
 							SetCursor(ConsolMessageX, ConsolMessageY + 1);
-							cout << "\tИгрок\tСыграно игр\tПобеды\tОчки";
+							cout << "\tРРіСЂРѕРє\tРЎС‹РіСЂР°РЅРѕ РёРіСЂ\tРџРѕР±РµРґС‹\tРћС‡РєРё";
 							for (size_t i = 0; i < list; i++)
 							{
 								SetCursor(ConsolMessageX, ConsolMessageY + i + 2);
 								cout << i + 1 << ": \t" << listUsers[i].login << "\t\t" << listUsers[i].countGames << "\t" << listUsers[i].countVictory << "\t" << listUsers[i].points << "\n";
 							}
 							SetCursor(ConsolMessageX, ConsolMessageY + list + 2);
-							cout << "Нажмите Esc, чтобы выйти в меню.";
+							cout << "РќР°Р¶РјРёС‚Рµ Esc, С‡С‚РѕР±С‹ РІС‹Р№С‚Рё РІ РјРµРЅСЋ.";
 							button = _getch();
 							if (button == esc)
 							{
@@ -1404,7 +1404,7 @@ int main()
 						Sleep(1000);
 						system("cls");
 						SetCursor(ConsolMessageX, ConsolMessageY);
-						cout << "Хотите сыграть ещё?";
+						cout << "РҐРѕС‚РёС‚Рµ СЃС‹РіСЂР°С‚СЊ РµС‰С‘?";
 						punct = Menu(EndMenu, countPunctsMenu);
 						if (punct == 0)
 						{
@@ -1418,7 +1418,7 @@ int main()
 						{
 							system("cls");
 							SetCursor(ConsolMessageX, ConsolMessageY);
-							cout << "Надеемся вы вернётесь!";
+							cout << "РќР°РґРµРµРјСЃСЏ РІС‹ РІРµСЂРЅС‘С‚РµСЃСЊ!";
 							Sleep(1000);
 							exit = true;
 						}
@@ -1429,7 +1429,7 @@ int main()
 			{
 				system("cls");
 				SetCursor(ConsolMessageX, ConsolMessageY);
-				cout << "Надеемся вы вернётесь!";
+				cout << "РќР°РґРµРµРјСЃСЏ РІС‹ РІРµСЂРЅС‘С‚РµСЃСЊ!";
 				Sleep(1000);
 				exit = true;
 			}
